@@ -32,15 +32,17 @@ def tile():
     # lat, lon = utm.to_latlon(float(laty), float(lonx), 50, "U")  # 36.710400756495844, 117.07552736231953
     # lon, lat = gps_transform.gcj02tobd09(lon, lat)  # 36.71619511543831, 117.08480138258149
 
-    lat, lon = 36.71619511543831, 117.08480138258149
+    # lat, lon = 36.710400756495844, 117.07552736231953
+    lat, lon = 36.711608315232034, 117.08250959049264
+    # lat, lon = 36.71619511543831, 117.08480138258149
     # ori_x, ori_y = deg2num(lat, lon, zoom)
 
-    a, b = GM.LatLonToMeters(lat, lon)
-    c, d = GM.MetersToTile(a, b, zoom)
-    print ("ori_x=%s\tori_y=%s" % GM.GoogleTile(c, d, int(zoom)))
-    ori_x, ori_y = GM.GoogleTile(c, d, zoom)
+    lat_m, lon_m = GM.LatLonToMeters(lat, lon)
+    lat_t, lon_t = GM.MetersToTile(lat_m, lon_m, zoom)
+    ori_x, ori_y = GM.GoogleTile(lat_t, lon_t, zoom)
+    print ("ori_x=%s\tori_y=%s" % (ori_x, ori_y))
     try:
-        with open("../../nky/%s/%s/%s.png" % (int(zoom) - 15, tilex-ori_x, tiley-ori_y-1), "rb") as fr:
+        with open("../../nkyt2/%s/%s/%s.png" % (zoom - 15, tilex-ori_x, tiley-ori_y-1), "rb") as fr:
             result = fr.read()
     except:
         result = None
