@@ -1195,7 +1195,8 @@ gdal2tiles temp.vrt"""
 
         # Get alpha band (either directly or from NODATA value)
 
-        self.alphaband = self.out_ds.GetRasterBand(1).GetMaskBand()
+        # self.alphaband = self.out_ds.GetRasterBand(1).GetMaskBand()
+        self.alphaband = self.out_ds.GetRasterBand(4)
         if self.alphaband.GetMaskFlags() & gdal.GMF_ALPHA \
             or self.out_ds.RasterCount == 4 or self.out_ds.RasterCount \
             == 2:

@@ -10,15 +10,18 @@
 
     // create the map
     var map = L.map(mapid, {
-      minZoom: minZoom,
-      maxZoom: maxZoom
+      center: [36.7097, 117.0804],
+      //minZoom: minZoom,
+      zoomDelta: 0.1,
+      maxZoom: 23,
+      zoom: 16
     })
 
     // assign map and image dimensions
-    var rc = new L.RasterCoords(map, img)
+    //var rc = new L.RasterCoords(map, img)
 
     // set the view on a marker ...
-    map.setView(rc.unproject([1000, 1000]), 2)
+    //map.setView(rc.unproject([1000, 1000]), 2)
 
     // add layer control object
     //L.control.layers({}, {
@@ -27,11 +30,15 @@
     //  'Bounds': layerBounds(map, rc, img),
     //  'Info': layerGeo(map, rc)
     //}).addTo(map)
-
+    L.tileLayer('https://mt3.google.cn/vt/lyrs=s@110&hl=zh-CN&gl=cn&src=app&s=Galileo&x={x}&y={y}&z={z}', {maxNativeZoom:23,zoomDelta:0.1,maxZoom:23,attribution: ''}).addTo(map);
+    L.tileLayer('https://mt1.google.cn/vt/imgtp=png32&lyrs=h@177000000&hl=zh-CN&gl=cn&src=app&s=Galileo&x={x}&y={y}&z={z}', {maxNativeZoom:23,zoomDelta:0.1,maxZoom:23, attribution: ''}).addTo(map);
     // the tile layer containing the image generated with gdal2tiles --leaflet ...
     //L.tileLayer('../static/tiles/{z}/{x}/{y}.png', {
-    L.tileLayer('http://127.0.0.1:5000/tile?x={x}&y={y}&z={z}', {
+    L.tileLayer('http://192.168.5.3:5001/tile?x={x}&y={y}&z={z}', {
       noWrap: true,
+      maxNativeZoom: 23,
+      maxZoom: 23,
+      zoomDelta:0.1,
       attribution: 'Map <a href="https://zhiyun.agrter.com">' +
         '智云系统</a> under ' +
         '<a href="http://www.agrter.com">恩格尔特</a>'

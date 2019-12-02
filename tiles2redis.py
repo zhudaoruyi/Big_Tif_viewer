@@ -22,7 +22,8 @@ def get_file(path):
 
 
 def get_url():
-    sr = StrictRedis(host='localhost', port=6379, db=2)
+    # sr = StrictRedis(host='localhost', port=6380, db=0)
+    sr = StrictRedis(host='localhost', port=6380, db=1)
     for img_dir in image_dirs:
         l = img_dir.split("/")
         with open(img_dir, 'rb') as f:
@@ -33,6 +34,7 @@ def get_url():
 
 
 if __name__ == '__main__':
-    get_file('/home/sinoeco/hdd/dataset/panorama/gdal_leaflet_viewer/tiles')
+    # get_file('tiles')
+    get_file('qihe_tiles')
     get_url()
 
